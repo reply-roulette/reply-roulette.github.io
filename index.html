@@ -190,7 +190,7 @@
 </main>
 <div class="toast" id="toast" hidden role="status"></div>
 
-<script src="parse.js?v=2"></script>
+<script src="parse.js?v=3"></script>
 <script>
 (function () {
   "use strict";
@@ -408,7 +408,8 @@
 
   // ============ 当選者 ============
   function winText() {
-    return "【当選者】\n" + S.wins.map((w) => "・" + (w.name || "") + (w.id ? "（@" + w.id + "）" : "")).join("\n") + "\nおめでとうございます！（参加者" + (S.wins[0] ? S.wins[0].n : 0) + "人の中から、ルーレットで決めました）";
+    // Xでは、@の直前に文字やカッコがあると通知が飛ばないので、@の前は必ず半角スペースにする
+    return "【当選者】\n" + S.wins.map((w) => "・" + (w.name || "") + (w.id ? " @" + w.id + " " : "")).join("\n") + "\nおめでとうございます！（参加者" + (S.wins[0] ? S.wins[0].n : 0) + "人の中から、ルーレットで決めました）";
   }
   function renderWins() {
     $("wins-box").hidden = !S.wins.length;
